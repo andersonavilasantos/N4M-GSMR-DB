@@ -1,0 +1,66 @@
+mag	Metagenome-assembled genome ID
+database	Source database
+fasta.link	Link to source FASTA file
+reconstruction.link	Link to metabolic reconstruction in SBML format
+domain	Taxonomic domain (GTDB-tk)
+phylum	Taxonomic phylum (GTDB-tk)
+class	Taxonomic class (GTDB-tk)
+order	Taxonomic order (GTDB-tk)
+family	Taxonomic family (GTDB-tk)
+genus	Taxonomic genus (GTDB-tk)
+species	Taxonomic species (GTDB-tk)
+completeness	Genome completeness (CheckM)
+contamination	Genome contamincation (CheckM)
+quality.score	Calculated quality score (completeness-5*contamination)
+quality	Determined quality level. High: completeness>90 & contamination<5 & quality score>50. Medium: completeness>50 & contamination<10 & quality score>50.
+n_scaffolds	Total sequence count of all scaffolds (https://microbiomedata.github.io/nmdc-schema/scaffolds/)
+n_contigs	"The sum of the (length*log(length)) of all contigs, times some constant (https://microbiomedata.github.io/nmdc-schema/contigs/)"
+scaf_bp	Total size in bp of all scaffolds (https://microbiomedata.github.io/nmdc-schema/scaf_bp/)
+contig_bp	Total size in bp of all contigs (https://microbiomedata.github.io/nmdc-schema/contig_bp/)
+gap_pct	The gap size percentage of all scaffolds (https://microbiomedata.github.io/nmdc-schema/gap_pct/)
+scaf_N50	"Given a set of scaffolds, each with its own length, the N50 count is defined as the smallest number of scaffolds whose length sum makes up half of genome size (https://microbiomedata.github.io/nmdc-schema/scaf_n50/)"
+scaf_L50	"Given a set of scaffolds, the L50 is defined as the sequence length of the shortest scaffold at 50% of the total genome length (https://microbiomedata.github.io/nmdc-schema/scaf_l50/)"
+ctg_N50	"Given a set of contigs, each with its own length, the N50 count is defined as the smallest number_of_contigs whose length sum makes up half of genome size (https://microbiomedata.github.io/nmdc-schema/ctg_n50/)"
+ctg_L50	"Given a set of contigs, the L50 is defined as the sequence length of the shortest contig at 50% of the total genome length (https://microbiomedata.github.io/nmdc-schema/ctg_l50/)"
+scaf_N90	"Given a set of scaffolds, each with its own length, the N90 count is defined as the smallest number of scaffolds whose length sum makes up 90% of genome size (https://microbiomedata.github.io/nmdc-schema/scaf_n90/)."
+scaf_L90	The L90 statistic is less than or equal to the L50 statistic; it is the length for which the collection of all scaffolds of that length or longer contains at least 90% of the sum of the lengths of all scaffolds (https://microbiomedata.github.io/nmdc-schema/scaf_l90/)
+ctg_N90	"Given a set of contigs, each with its own length, the N90 count is defined as the smallest number of contigs whose length sum makes up 90% of genome size (https://microbiomedata.github.io/nmdc-schema/ctg_n90/)"
+ctg_L90	The L90 statistic is less than or equal to the L50 statistic; it is the length for which the collection of all contigs of that length or longer contains at least 90% of the sum of the lengths of all contigs (https://microbiomedata.github.io/nmdc-schema/ctg_l90/)
+scaf_max	Maximum scaffold length (https://microbiomedata.github.io/nmdc-schema/scaf_max/)
+ctg_max	Maximum contig length (https://microbiomedata.github.io/nmdc-schema/ctg_max/)
+scaf_n_gt50K	Total sequence count of scaffolds greater than 50 KB (https://microbiomedata.github.io/nmdc-schema/scaf_n_gt50k/)
+scaf_pct_gt50K	Total sequence size percentage of scaffolds greater than 50 KB (https://microbiomedata.github.io/nmdc-schema/scaf_pct_gt50k/)
+gc_avg	Average of GC content of all contigs (https://microbiomedata.github.io/nmdc-schema/gc_avg/)
+gc_std	Standard deviation of GC content of all contigs (https://microbiomedata.github.io/nmdc-schema/gc_std/)
+total.proteins	Total number of proteins in annotated genome (Prokka)
+hypothetical.proteins	Total number of hypothetical proteins in annotated genome (Prokka)
+annotation.ratio	Ratio of annotated proteins in genome (Prokka)
+stoich_consist	Stoichiometric consistency (Memote)
+total_score	Total score (Memote)
+consistency_score	Consistency total score (Memote)
+ann_rxn_score	Reaction annotation total score (Memote)
+ann_met_score	Metabolite annotation total score (Memote)
+ann_gene_score	Gene annotation total score (Memote)
+ann_sbo_score	Systems biology ontology (SBO) total score (Memote)
+mets_num	Number of metabolites (Memote)
+rxns_num	Number of reactions (Memote)
+genes_num	Number of genes (Memote)
+compartments_num	Number of compartments (Memote)
+mets_coverage	"The degree of metabolic coverage indicates the modeling detail of a given reconstruction calculated by dividing the total amount of reactions by the amount of genes. Models with a 'high level of modeling detail have ratios >1, and models with a low level of detail have ratios <1 (Memote)."
+mets_unconserved	Number of unconserved metabolites (Memote)
+mets_nocharge	Number of metabolites without charge (Memote)
+mets_noformula	Number of metabolites without formula (Memote)
+rxns_nogpr	Number of reactions without gene-protein-reaction (GPR) associations (Memote)
+nogpr.ratio	Ratio of reactions without gene-protein-reaction (GPR) rules
+rxns_metabolic	Number of purely metabolic reactions (Memote)
+rxns_transport	Number of transport reactions (Memote)
+rxns_chargeunbalanced	Number of charge unbalanced reactions (Memote)
+rxns_massunbalanced	Number of mass unbalanced reactions (Memote)
+rxns_blocked	Number of blocked reactions (Memote)
+sbc	Stoichiometrically balanced cycles (Memote)
+rank	Rank of the stoichiometric matrix (Memote)
+degfree	Degrees of freedom of the stoichiometric matrix (Memote)
+max.growth.minmedia	Maximum growth rate on the simulated minimal media
+num.minmedia.C.mets	Number of carbon-containing metabolites in the simulated minimal media
+growth.yield	Growth yield calculated as the maximum growth rate on minimal media divided by the influx of carbon atoms
+rk.index	Calculated r/K-index
