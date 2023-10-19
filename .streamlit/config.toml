@@ -1,0 +1,19 @@
+[server]
+enableCORS = false
+
+[theme]
+
+# Primary color used for most UI elements and active states
+primaryColor = "#FFB12D"
+
+# Background color for the main content area
+backgroundColor = "#f0f0f5"
+
+# Background color for the sidebar and interactive widgets. Also used for activ>
+secondaryBackgroundColor = "#E59B26"
+
+# Main text color
+textColor = "#212529"
+
+# Default font for the UI
+font = "sans serif"
