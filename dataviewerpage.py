@@ -3,9 +3,7 @@ import pandas as pd
 import ternary
 from st_aggrid import AgGrid, GridOptionsBuilder
 import dataloader  # Certifique-se de que este módulo está corretamente importado
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import matplotlib.cm as cm
+from graphplots import GraphPlots
 
 class DataViewerPage:
     def __init__(self, data: pd.DataFrame):
@@ -77,54 +75,19 @@ class DataViewerPage:
             fit_columns_on_grid_load=False,
             allow_unsafe_jscode=True  # Este parâmetro pode ser necessário para a renderização de links
         )
+        graph_plots = GraphPlots(filtered_data)
 
-        # Ternary Plot
-        df_ternary = filtered_data[['max.growth.minmedia', 'num.minmedia.C.mets', 'growth.yield', 'rk.index']].copy()
+        col1, col2 = st.columns(2)
 
-        # Convert to float
-        for column in df_ternary.columns:
-            df_ternary[column] = pd.to_numeric(df_ternary[column], errors='coerce')
+        with col1:
+            fig = graph_plots.ternary_plot()
+            st.pyplot(fig, use_container_width=True)
 
-        # Drop NaN values
-        df_ternary.dropna(inplace=True)
+        with col2:
+            kde_figures = graph_plots.kde_plots()
+            for fig in kde_figures:
+                st.pyplot(fig)
 
-        # Normalize the data
-        df_ternary[['max.growth.minmedia', 'num.minmedia.C.mets', 'growth.yield']] = df_ternary[['max.growth.minmedia', 'num.minmedia.C.mets', 'growth.yield']].div(df_ternary[['max.growth.minmedia', 'num.minmedia.C.mets', 'growth.yield']].sum(axis=1), axis=0)
-
-        # Normalize the rk.index values for color mapping
-        norm = mcolors.Normalize(vmin=df_ternary['rk.index'].min(), vmax=df_ternary['rk.index'].max())
-        colormap = cm.ScalarMappable(norm=norm, cmap=cm.RdYlGn)
-        colors = df_ternary['rk.index'].apply(lambda x: colormap.to_rgba(x))
-
-        # Create a figure using matplotlib
-        fig, ax = plt.subplots(figsize=(5, 3.5), dpi=150)  # Ajustado para tornar o plot menor
-
-        # Pass the ax to ternary for plotting
-        tax = ternary.TernaryAxesSubplot(ax=ax, scale=1)
-
-        tax.scatter(df_ternary[['max.growth.minmedia', 'num.minmedia.C.mets', 'growth.yield']].values, marker='o', color=colors, edgecolor='black')
-        tax.gridlines(multiple=0.1, color="gray")
-
-        # Adiciona os números aos eixos
-        tax.ticks(axis='lbr', multiple=0.2, linewidth=1, tick_formats="%.1f")
-
-        tax.get_axes().axis('off')
-        tax.boundary(linewidth=1.0)
-
-        # Set labels for the axes
-        # Set labels for the axes
-        fontsize = 12
-        tax.set_title("Ternary plot with coordinates of the individual r/K-index features", fontsize=16, y=1.08)
-        tax.left_axis_label('Maximum biomass flux', fontsize=fontsize, offset=0.12)  # Ajustado para corresponder aos rótulos definidos em tax.ticks()
-        tax.right_axis_label('Growth yield', fontsize=fontsize, offset=0.12)  # Ajustado para corresponder aos rótulos definidos em tax.ticks()
-        tax.bottom_axis_label('Number of C-containing metabolites', fontsize=fontsize, offset=0.12)  # Ajustado para corresponder aos rótulos definidos em tax.ticks()
-
-        # Add a colorbar to indicate the rk.index values
-        cbar = fig.colorbar(colormap, ax=ax, orientation='vertical', fraction=0.04, pad=0.1)
-        cbar.set_label('rk.index', fontsize=12)
-
-        st.pyplot(fig, use_container_width=False)
-      
         csv_data = filtered_data.to_csv(index=False)
         st.download_button(
             label="Download Filtered Data as CSV",
@@ -136,10 +99,14 @@ class DataViewerPage:
         
 
         st.markdown('<div class="footer">© 2023 MAG-based Genome-Scale Metabolic Reconstruction Database</div>', unsafe_allow_html=True)
+@st.cache
+def load_and_filter_data():
+    df = dataloader.load_data()  # Carrega os dados uma única vez
+    return df
 
 if __name__ == "__main__":
     # Sample data
-    df = dataloader.load_data()  # Este método deve ser definido no módulo 'dataloader'
+    df = load_and_filter_data() # Este método deve ser definido no módulo 'dataloader'
 
     data_viewer = DataViewerPage(df)
     data_viewer.render()

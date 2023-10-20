@@ -33,13 +33,14 @@ st.markdown("""
         position: fixed;
         bottom: 0;
         left: 0;
-        width: 95%;
+        width: 100%;
         background-color: white;
         padding: 10px 0;
     }
     .footer p {
         margin: 0;
     }
+    
 </style>
 """, unsafe_allow_html=True)
 
@@ -62,13 +63,13 @@ def display_footer():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.image("nfdi4microbiota_Logo_new.png", width=200)
+        st.image("nfdi4microbiota_Logo_new.png", width=250)
     with col2:
-        st.image("ufz_med_trans.png", width=300)
+        st.image("ufz_med_trans.png", width=450)
     with col3:
-        st.image("uni_leipzig_logo_trans.png", width=285)
+        st.image("uni_leipzig_logo_trans.png", width=350)
     with col4:
-        st.image("icmc_big_trans.png", width=222)
+        st.image("icmc_big_trans.png", width=240)
     
     footer_html = """
         <style>
@@ -93,8 +94,8 @@ df = dataloader.load_data()
 
 st.title("MAG-based Genome-Scale Metabolic Reconstruction Database")
 
-menu_items = ["Home", "Quick Search", "Advanced Search", "Help", "Contact", "Interactive Graphics"]
-icons_list = ['house', 'eye', 'search', 'question-circle', 'envelope', 'bar-chart']
+menu_items = ["Home", "Quick Search", "Advanced Search", "Help", "Contact"] #, "Interactive Graphics"
+icons_list = ['house', 'eye', 'search', 'question-circle', 'envelope']#, 'bar-chart'
 
 if 'page' not in st.session_state:
     st.session_state.page = "Home"
@@ -116,9 +117,9 @@ elif st.session_state.page == "Help":
 elif st.session_state.page == "Contact":
     contact_page = ContactPage()
     contact_page.render()
-elif st.session_state.page == "Interactive Graphics":
-    interactive_page = InteractiveChartPage(df)
-    interactive_page.render()
+#elif st.session_state.page == "Interactive Graphics":
+#    interactive_page = InteractiveChartPage(df)
+#    interactive_page.render()
 
 # Exiba o rodapé
 display_footer()
