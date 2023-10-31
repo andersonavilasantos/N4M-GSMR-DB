@@ -1,12 +1,12 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from homepage import HomePage
 from dataviewerpage import DataViewerPage
 import dataloader
 from advancedsearch import AdvancedSearchPage
 from contact import ContactPage
 from helppage import HelpPage
 from interactivechart import InteractiveChartPage
+from dataavailability import DataAvailability
 
 # Defina a configuração da página como a primeira chamada
 st.set_page_config(layout="wide")
@@ -94,8 +94,8 @@ df = dataloader.load_data()
 
 st.title("MAG-based Genome-Scale Metabolic Reconstruction Database")
 
-menu_items = ["Home", "Quick Search", "Advanced Search", "Help", "Contact"] #, "Interactive Graphics"
-icons_list = ['house', 'eye', 'search', 'question-circle', 'envelope']#, 'bar-chart'
+menu_items = ["Home", "Quick Search", "Advanced Search", "Help", "Data Availability", "Contact"] #, "Interactive Graphics"
+icons_list = ['house', 'eye', 'search', 'question-circle', 'database','envelope']#, 'bar-chart'
 
 if 'page' not in st.session_state:
     st.session_state.page = "Home"
@@ -114,6 +114,9 @@ elif st.session_state.page == "Advanced Search":
 elif st.session_state.page == "Help":
     help_page = HelpPage()
     help_page.render()
+elif st.session_state.page == "Data Availability":
+    data_ava = DataAvailability()
+    data_ava.render()
 elif st.session_state.page == "Contact":
     contact_page = ContactPage()
     contact_page.render()
